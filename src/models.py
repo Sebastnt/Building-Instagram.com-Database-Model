@@ -28,23 +28,22 @@ class Posts(Base):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
     profile_id = Column(BigInteger, ForeignKey('profile.id'))
-    comments_id = Column(Integer, ForeignKey('comments.id'))
     url = Column(String(250), nullable=False)
     likes = Column(Integer, nullable=False)
-    views = Column(Integer, nullable=False)
 
 class Stories(Base):
     __tablename__ = 'stories'
     id = Column(Integer, primary_key=True)
     profile_id = Column(BigInteger, ForeignKey('profile.id'))
-    comments_id = Column(Integer, ForeignKey('comments.id'))
     likes = Column(Integer, nullable=False)
-
+    views = Column(Integer, nullable=False)
 
 class Comments(Base):
     __tablename__ = 'comments'
     id = Column(Integer, primary_key=True)
-    profile_id = Column(BigInteger, ForeignKey('profile.id'))
+    comments_user = Column(BigInteger, ForeignKey('profile.id'))
+    stories_id = Column(BigInteger, ForeignKey('stories.id'))
+    posts_id = Column(BigInteger, ForeignKey('posts.id'))
     comments_content = Column(String(250), nullable=False)
     comments_likes = Column(Integer, nullable=False)
 
